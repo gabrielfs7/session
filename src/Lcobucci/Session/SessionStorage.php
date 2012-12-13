@@ -261,7 +261,9 @@ class SessionStorage implements \ArrayAccess
 	{
 		if (count($this->getObjects()) > 0) {
 			foreach ($this->getObjects() as $identifier) {
-				$this->storage[$identifier] = unserialize($this->storage[$identifier]);
+				$this->storage[$identifier] = is_string($this->storage[$identifier])
+                                              ? unserialize($this->storage[$identifier])
+                                              : $this->storage[$identifier];
 			}
 		}
 	}
